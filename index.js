@@ -1,14 +1,9 @@
-var lessons = require('./lib/lessons');
-var applyConcepts = require('./lib/concepts');
-var correlateToVirtualEconomics = require('./lib/standards/virtual-economics');
-var correlateToNCEE = require('./lib/standards/ncee-database');
-var matchConceptsToStandards = require('./lib/standards/concepts-to-standards')
-var fetchStandards = require('./lib/standards/format-standards')
+#!/usr/bin/env node
 
-lessons
-  .pipe(applyConcepts())
-  .pipe(matchConceptsToStandards())
-  .pipe(correlateToVirtualEconomics())
-  .pipe(correlateToNCEE())
-  .pipe(fetchStandards())
-  .on('data', console.log);
+var stream = require('./lib/stream');
+
+if (__dirname === process.argv[1] || __filename === process.argv[1]) {
+  stream();
+}
+
+module.exports = stream;
